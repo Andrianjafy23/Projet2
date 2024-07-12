@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+            font-weight: 300;
+            color: rgb(1, 17, 31);
+            font-size: 30px;
+            margin-top: 10px;
+            text-shadow: 0 0 10px rgb(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <h1>LISTE DE RÉSERVATION</h1>
+    <section class="res">
+        <% for(i=0; i<resultat.length; i++) { %>
+            <div class="plac">
+                <p>  Nom : <b><%= resultat[i].Nom %></b></p>
+                <p>Numero telephone : <b><%= resultat[i].Numph %></b></p>
+                <p>Numero CIN : <b><%= resultat[i].NumCIN %></b></p>
+                <p>Votre email : <b><%= resultat[i].email %></b></p>
+                <p>Date de départ : <b><%= resultat[i].date %></b></p>
+                <p>à : <b><%= resultat[i].heure %></b></p>
+                <p>Votre déstination c'est à : <b> <%= resultat[i].destination %></b></p>
+                <input type="button" value="supprimer" onclick="supprimer('<%= resultat[i].id %>')">
+            </div>
+        <% } %>
+    </section>
+
+</body>
+<script>
+    function supprimer(id) {
+        let pt = "laza/" + id
+        fetch(
+            pt, {method : "DELETE"}
+        ).then(
+            (reponse)=> reponse.json()
+        ).then(
+            (donnee)=> window.location.href = donnee.routeRacine
+        ).catch((erreur)=> console.log(erreur))
+    }
+</script>
+</html>
